@@ -13,4 +13,8 @@ struct SignUpModel {
     var email: String
     var password: String
     var confirmPassword: String
+    
+    var passwordMatch: Bool {
+        return password == confirmPassword
+    }
 }

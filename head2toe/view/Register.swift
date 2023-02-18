@@ -9,27 +9,25 @@ import SwiftUI
 
 struct Register: View {
     var handler: (SignUpModel) -> Void
-    @State private var username = ""
-    @State private var email = ""
-    @State private var password = ""
-    @State private var confirmPassword = ""
+    @State private var signUpModel = SignUpModel(username: "", email: "", password: "", confirmPassword: "")
     
     var body: some View {
         VStack {
-            TextField("Username", text: $username)
+            TextField("Username", text: $signUpModel.username)
                 .padding()
-            TextField("Email", text: $email)
+            TextField("Email", text: $signUpModel.email)
                 .padding()
-            SecureField("Username", text: $username)
+            SecureField("Username", text: $signUpModel.password)
                 .padding()
-            SecureField("Confirm Password", text: $confirmPassword)
+            SecureField("Confirm Password", text: $signUpModel.confirmPassword)
                 .padding()
             Button(action: {
-                let user = SignUpModel(username: self.username, email: self.email, password: self.password, confirmPassword: self.confirmPassword)
+                let user = SignUpModel(username: self.signUpModel.username, email: self.signUpModel.email, password: self.signUpModel.password, confirmPassword: self.signUpModel.confirmPassword)
                 self.handler(user)
             }, label: {
                 Text("Register")
             })
+            .disabled(!signUpModel.passwordMatch)
         }
     }
 }
