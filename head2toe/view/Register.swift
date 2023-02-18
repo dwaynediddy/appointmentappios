@@ -37,7 +37,7 @@ struct Register: View {
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
         Register { user in
-            print("username is \(user.username)")
+            print("username is \(user.username) \(user.email)")
         }
     }
 }
