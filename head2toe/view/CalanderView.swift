@@ -9,13 +9,33 @@ import SwiftUI
 
 struct CalanderView: View {
     @State private var date = Date()
+
+    var minDate: Date {
+        return Calendar.current.date(byAdding: .day, value: 3, to: Date())!
+    }
+
+    var maxDate: Date {
+        return Calendar.current.date(byAdding: .day, value: 14, to: Date())!
+    }
+
     var body: some View {
-        DatePicker(
-        "Select Date",
-        selection: $date,
-        displayedComponents: [.date]
-        )
-            .datePickerStyle(.graphical)
+        NavigationView {
+            VStack {
+                DatePicker(
+                    "Select Date",
+                    selection: $date,
+                    in: minDate...maxDate,
+                    displayedComponents: [.date]
+                )
+                .datePickerStyle(.graphical)
+
+                NavigationLink(
+                    destination: TimeView(selectedDate: date),
+                    label: {
+                        Text("Select Time")
+                    })
+            }
+        }
     }
 }
 
